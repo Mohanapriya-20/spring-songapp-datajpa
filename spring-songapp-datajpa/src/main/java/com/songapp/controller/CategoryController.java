@@ -3,6 +3,8 @@ package com.songapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,33 +27,51 @@ public class CategoryController {
 	ICategoryService categoryService;
 
 	@PostMapping("/categories")
-	public Category addCategory(@RequestBody Category category) {
-		return categoryService.addCategory(category);
+	public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Category Added");
+		Category categoryNew = categoryService.addCategory(category);
+		return ResponseEntity.ok().headers(headers).body(categoryNew);
 	}
 
 	@PutMapping("/categories")
-	public void updateMovie(@RequestBody Category category) {
+	public ResponseEntity<Void> updateMovie(@RequestBody Category category) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Category Updated");
 		categoryService.updateCategory(category);
+		return ResponseEntity.ok().headers(headers).build();
 	}
 
 	@DeleteMapping("/categories/{categoryId}")
-	void deleteCategory(@PathVariable("categoryId") int categoryId) {
+	ResponseEntity<Void> deleteCategory(@PathVariable("categoryId") int categoryId) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Category Updated");
 		categoryService.deleteCategory(categoryId);
+		return ResponseEntity.ok().headers(headers).build();
 	}
 
 	@GetMapping("/categories")
-	public List<Category> getAllCategories() {
-		return categoryService.getAll();
+	public ResponseEntity<List<Category>> getAllCategories() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving All Categories");
+		List<Category> categoryList = categoryService.getAll();
+		return ResponseEntity.ok().headers(headers).body(categoryList);
 	}
 
 	@GetMapping("/categories/{categoryId}")
-	public Category getById(@PathVariable("categoryId") int categoryId) {
-		return categoryService.getById(categoryId);
+	public ResponseEntity<Category> getById(@PathVariable("categoryId") int categoryId) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Categories By Id");
+		Category categoryNew = categoryService.getById(categoryId);
+		return ResponseEntity.ok().headers(headers).body(categoryNew);
 	}
 
 	@GetMapping("/categories/categoryName/{CategoryName}")
-	Category getByCategoryName(@PathVariable("CategoryName") String CategoryName) {
-		return categoryService.getByCategoryName(CategoryName);
+	ResponseEntity<Category> getByCategoryName(@PathVariable("CategoryName") String CategoryName) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Categories By CategoryName");
+		Category categoryNew = categoryService.getByCategoryName(CategoryName);
+		return ResponseEntity.ok().headers(headers).body(categoryNew);
 	}
 
 }

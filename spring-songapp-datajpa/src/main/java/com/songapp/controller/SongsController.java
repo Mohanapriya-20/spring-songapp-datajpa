@@ -3,6 +3,8 @@ package com.songapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,10 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.songapp.model.Description;
 import com.songapp.model.Song;
-import com.songapp.service.IDescriptionService;
 import com.songapp.service.ISongService;
 
 /**
@@ -26,101 +25,131 @@ import com.songapp.service.ISongService;
 public class SongsController {
 	@Autowired
 	ISongService songService;
-	@Autowired
-	IDescriptionService descriptionService;
 
 	@PostMapping("/songs")
-	public Song addSong(@RequestBody Song song) {
-		return songService.addSong(song);
+	public ResponseEntity<Song> addSong(@RequestBody Song song) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Song Added");
+		Song songNew = songService.addSong(song);
+		return ResponseEntity.ok().headers(headers).body(songNew);
 	}
 
 	@PutMapping("/songs")
-	public void updateSong(@RequestBody Song song) {
+	public ResponseEntity<Void> updateSong(@RequestBody Song song) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Song Updated");
 		songService.updateSong(song);
+		return ResponseEntity.ok().headers(headers).build();
 	}
 
 	@DeleteMapping("/songs/{songId}")
-	void deleteSong(@PathVariable("songId") int songId) {
+	ResponseEntity<Void> deleteSong(@PathVariable("songId") int songId) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Song Deleted");
 		songService.deleteSong(songId);
+		return ResponseEntity.ok().headers(headers).build();
 	}
 
 	@GetMapping("/songs")
-	public List<Song> getAllSongs() {
-		return songService.getAll();
+	public ResponseEntity<List<Song>> getAllSongs() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "All Songs");
+		List<Song> songList = songService.getAll();
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
 	@GetMapping("/songs/{songId}")
-	public Song getById(@PathVariable("songId") int songId) {
-		return songService.getById(songId);
+	public ResponseEntity<Song> getById(@PathVariable("songId") int songId) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Id");
+		Song songNew = songService.getById(songId);
+		return ResponseEntity.ok().headers(headers).body(songNew);
 	}
 
 	@GetMapping("/songs/name/{name}")
-	public Song getByName(@PathVariable("name") String name) {
-		return songService.getByName(name);
+	public ResponseEntity<Song> getByName(@PathVariable("name") String name) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Name");
+		Song songNew = songService.getByName(name);
+		return ResponseEntity.ok().headers(headers).body(songNew);
+
 	}
+
 	@GetMapping("/songs/lyrics/{lyrics}")
-	public List<Song> getByDescriptionLyrics(@PathVariable("lyrics") String lyrics) {
-		return songService.getByDescriptionLyrics(lyrics);
+	public ResponseEntity<List<Song>> getByDescriptionLyrics(@PathVariable("lyrics") String lyrics) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Lyrics");
+		List<Song> songList = songService.getByDescriptionLyrics(lyrics);
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
 	@GetMapping("/songs/lyricist/{lyricist}")
-	public List<Song> getByDescriptionLyricist(@PathVariable("lyricist") String lyricist) {
-		return songService.getByDescriptionLyricist(lyricist);
+	public ResponseEntity<List<Song>> getByDescriptionLyricist(@PathVariable("lyricist") String lyricist) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Lyricist");
+		List<Song> songList = songService.getByDescriptionLyricist(lyricist);
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
 	@GetMapping("/songs/language/{language}")
-	public List<Song> getByDescriptionLanguage(@PathVariable("language") String language) {
-		return songService.getByDescriptionLanguage(language);
+	public ResponseEntity<List<Song>> getByDescriptionLanguage(@PathVariable("language") String language) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Language");
+		List<Song> songList = songService.getByDescriptionLanguage(language);
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
 	@GetMapping("/songs/views/{views}")
-	public List<Song> getByDescriptionViews(@PathVariable("views") int views) {
-		return songService.getByDescriptionViews(views);
+	public ResponseEntity<List<Song>> getByDescriptionViews(@PathVariable("views") int views) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Views");
+		List<Song> songList = songService.getByDescriptionViews(views);
+		return ResponseEntity.ok().headers(headers).body(songList);
+
 	}
 
 	@GetMapping("/songs/language/{language}/name/{name}")
-	public List<Song> getByDescriptionLanguageAndName(@PathVariable("language") String language,
+	public ResponseEntity<List<Song>> getByDescriptionLanguageAndName(@PathVariable("language") String language,
 			@PathVariable("name") String name) {
-		return songService.getByDescriptionLanguageAndSongName(language, name);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Language and Name");
+		List<Song> songList = songService.getByDescriptionLanguageAndSongName(language, name);
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
 	@GetMapping("/songs/moviename/{movieName}")
-	public List<Song> getByMovieName(@PathVariable("movieName") String movieName) {
-		return songService.getByMovieName(movieName);
+	public ResponseEntity<List<Song>> getByMovieName(@PathVariable("movieName") String movieName) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Language and Name");
+		List<Song> songList = songService.getByMovieName(movieName);
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
 	@GetMapping("/songs/name/{name}/moviename/{movieName}")
-	public Song findBySongNameAndMovieName(@PathVariable("name") String name,
+	public ResponseEntity<Song> findBySongNameAndMovieName(@PathVariable("name") String name,
 			@PathVariable("movieName") String movieName) {
-		return songService.getBySongNameAndMovieMovieName(name, movieName);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Language and Name");
+		Song songNew = songService.getBySongNameAndMovieMovieName(name, movieName);
+		return ResponseEntity.ok().headers(headers).body(songNew);
 	}
 
 	// Many to Many
 	@GetMapping("/songs/singername/{name}")
-	public List<Song> getBySingerName(@PathVariable("name") String name) {
-		return songService.getBySingerName(name);
+	public ResponseEntity<List<Song>> getBySingerName(@PathVariable("name") String name) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Singer Name");
+		List<Song> songList = songService.getBySingerName(name);
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
 	// Many to One for Category
 	@GetMapping("/songs/categoryname/{categoryName}")
-	public List<Song> getByCategoryName(@PathVariable("categoryName") String categoryName) {
-		return songService.getByCategoryName(categoryName);
-	}
-	@PostMapping("/description")
-	public void addDescription(@RequestBody Description description) {
-		   descriptionService.addDescription(description);
-	}
-	@PutMapping("/description")
-	public void updateDescription(@RequestBody Description description) {
-		   descriptionService.updateDescription(description);
-	}
-	@DeleteMapping("/description/{descriptionId}")
-	public void deleteDescription(@PathVariable("descriptionId") int descriptionId) {
-		   descriptionService.deleteDescription(descriptionId);
+	public ResponseEntity<List<Song>> getByCategoryName(@PathVariable("categoryName") String categoryName) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("desc", "Retriving Song By Category");
+		List<Song> songList = songService.getByCategoryName(categoryName);
+		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
-	@GetMapping("/description/songname/{name}")
-	public Description findBySongName(@PathVariable("name") String name) {
-		return descriptionService.getBySongName(name);
-	}
 }
