@@ -70,7 +70,7 @@ public class SongsController {
 	public ResponseEntity<Song> getByDescriptionLyrics(@PathVariable("lyrics") String lyrics) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("desc", "Retriving Song By Lyrics");
-	     Song song = songService.getByDescriptionLyrics(lyrics);
+		Song song = songService.getByDescriptionLyrics(lyrics);
 		return ResponseEntity.ok().headers(headers).body(song);
 	}
 
@@ -117,10 +117,11 @@ public class SongsController {
 	}
 
 	@GetMapping("/songs/moviename/{movieName}/name/{name}")
-	public ResponseEntity<Song> findByMovieNameAndSongName(@PathVariable("movieName") String movieName,@PathVariable("name") String name) {
+	public ResponseEntity<Song> findByMovieNameAndSongName(@PathVariable("movieName") String movieName,
+			@PathVariable("name") String name) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("desc", "Retriving Song By Language and Name");
-		Song songNew = songService.getByMovieNameAndSongName(movieName,name);
+		Song songNew = songService.getByMovieNameAndSongName(movieName, name);
 		return ResponseEntity.ok().headers(headers).body(songNew);
 	}
 

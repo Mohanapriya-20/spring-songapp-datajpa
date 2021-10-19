@@ -57,7 +57,7 @@ public class SongServiceImpl implements ISongService {
 
 	@Override
 	public Song getByDescriptionLyrics(String lyrics) throws SongNotFoundException {
-		Song song= songRepository.findByDescriptionLyrics(lyrics);
+		Song song = songRepository.findByDescriptionLyrics(lyrics);
 		if (song == null)
 			throw new SongNotFoundException("Invalid Lyrics");
 		return song;
@@ -90,7 +90,7 @@ public class SongServiceImpl implements ISongService {
 	@Override
 	public Song getByDescriptionLanguageAndSongName(String language, String name) throws SongNotFoundException {
 		Song song = songRepository.findByDescriptionLanguageAndSongName(language, name);
-		if (song==null)
+		if (song == null)
 			throw new SongNotFoundException("Please Enter Valid Language And Song Name!!");
 		return song;
 	}
@@ -105,9 +105,9 @@ public class SongServiceImpl implements ISongService {
 	}
 
 	@Override
-	public Song getByMovieNameAndSongName(String movieName,String name ) throws SongNotFoundException {
+	public Song getByMovieNameAndSongName(String movieName, String name) throws SongNotFoundException {
 
-		Song song = songRepository.findByMovieNameAndSongName(movieName,name);
+		Song song = songRepository.findByMovieNameAndSongName(movieName, name);
 		if (song == null)
 			throw new SongNotFoundException("Please Enter Valid Song Name And Movie Name!!");
 		return song;
