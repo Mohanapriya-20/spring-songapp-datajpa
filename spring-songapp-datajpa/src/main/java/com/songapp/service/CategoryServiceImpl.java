@@ -56,10 +56,10 @@ public class CategoryServiceImpl implements ICategoryService {
 	}
 
 	@Override
-	public Category getByCategoryName(String categoryName) throws CategoryNotFoundException {
-		Category category = categoryRepository.findByCategoryName(categoryName);
+	public Category getBySongName(String name) throws CategoryNotFoundException {
+		Category category = categoryRepository.findBySongName(name);
 		if (category == null)
-			throw new CategoryNotFoundException("Please Enter Valid Category!!");
+			throw new CategoryNotFoundException("Please Enter Correct Song!!");
 		return category;
 	}
 

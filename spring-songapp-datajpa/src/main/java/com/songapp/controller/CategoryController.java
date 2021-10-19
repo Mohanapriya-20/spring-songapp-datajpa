@@ -66,11 +66,11 @@ public class CategoryController {
 		return ResponseEntity.ok().headers(headers).body(categoryNew);
 	}
 
-	@GetMapping("/categories/categoryName/{CategoryName}")
-	ResponseEntity<Category> getByCategoryName(@PathVariable("CategoryName") String CategoryName) {
+	@GetMapping("/categories/songname/{name}")
+	ResponseEntity<Category> getBySongName(@PathVariable("name") String name) {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("desc", "Retriving Categories By CategoryName");
-		Category categoryNew = categoryService.getByCategoryName(CategoryName);
+		headers.add("desc", "Retriving Category By Song name");
+		Category categoryNew = categoryService.getBySongName(name);
 		return ResponseEntity.ok().headers(headers).body(categoryNew);
 	}
 

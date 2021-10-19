@@ -1,5 +1,7 @@
 package com.songapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,8 @@ public class DescriptionServiceImpl implements IDescriptionService {
 	}
 
 	@Override
-	public void addDescription(Description description) {
-		descriptionRepository.save(description);
+	public Description addDescription(Description description) {
+		return descriptionRepository.save(description);
 	}
 
 	@Override
@@ -35,6 +37,11 @@ public class DescriptionServiceImpl implements IDescriptionService {
 	@Override
 	public void deleteDescription(int descriptionId) {
 		descriptionRepository.deleteById(descriptionId);
+	}
+
+	@Override
+	public List<Description> getAllDescription() {
+		return descriptionRepository.findAll();
 	}
 
 	@Override

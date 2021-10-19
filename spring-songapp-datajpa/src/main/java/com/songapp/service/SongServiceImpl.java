@@ -51,24 +51,16 @@ public class SongServiceImpl implements ISongService {
 
 		Song song = songRepository.findById(songId).get();
 		if (song == null)
-			throw new SongNotFoundException("Song Id Not Found");
+			throw new IdNotFoundException("Song Id Not Found");
 		return song;
 	}
 
 	@Override
-	public Song getByName(String name) throws SongNotFoundException {
-		Song song = songRepository.findByName(name);
+	public Song getByDescriptionLyrics(String lyrics) throws SongNotFoundException {
+		Song song= songRepository.findByDescriptionLyrics(lyrics);
 		if (song == null)
-			throw new SongNotFoundException("Invalid Song Name");
-		return song;
-	}
-
-	@Override
-	public List<Song> getByDescriptionLyrics(String lyrics) throws SongNotFoundException {
-		List<Song> songList = songRepository.findByDescriptionLyrics(lyrics);
-		if (songList.isEmpty())
 			throw new SongNotFoundException("Invalid Lyrics");
-		return songList;
+		return song;
 	}
 
 	@Override
@@ -96,11 +88,11 @@ public class SongServiceImpl implements ISongService {
 	}
 
 	@Override
-	public List<Song> getByDescriptionLanguageAndSongName(String language, String name) throws SongNotFoundException {
-		List<Song> songList = songRepository.findByDescriptionLanguageAndSongName(language, name);
-		if (songList.isEmpty())
+	public Song getByDescriptionLanguageAndSongName(String language, String name) throws SongNotFoundException {
+		Song song = songRepository.findByDescriptionLanguageAndSongName(language, name);
+		if (song==null)
 			throw new SongNotFoundException("Please Enter Valid Language And Song Name!!");
-		return songList;
+		return song;
 	}
 
 	@Override
@@ -113,9 +105,9 @@ public class SongServiceImpl implements ISongService {
 	}
 
 	@Override
-	public Song getBySongNameAndMovieMovieName(String name, String movieName) throws SongNotFoundException {
+	public Song getByMovieNameAndSongName(String movieName,String name ) throws SongNotFoundException {
 
-		Song song = songRepository.findBySongNameAndMovieName(name, movieName);
+		Song song = songRepository.findByMovieNameAndSongName(movieName,name);
 		if (song == null)
 			throw new SongNotFoundException("Please Enter Valid Song Name And Movie Name!!");
 		return song;

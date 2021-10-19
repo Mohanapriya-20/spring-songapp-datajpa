@@ -66,21 +66,12 @@ public class SongsController {
 		return ResponseEntity.ok().headers(headers).body(songNew);
 	}
 
-	@GetMapping("/songs/name/{name}")
-	public ResponseEntity<Song> getByName(@PathVariable("name") String name) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("desc", "Retriving Song By Name");
-		Song songNew = songService.getByName(name);
-		return ResponseEntity.ok().headers(headers).body(songNew);
-
-	}
-
 	@GetMapping("/songs/lyrics/{lyrics}")
-	public ResponseEntity<List<Song>> getByDescriptionLyrics(@PathVariable("lyrics") String lyrics) {
+	public ResponseEntity<Song> getByDescriptionLyrics(@PathVariable("lyrics") String lyrics) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("desc", "Retriving Song By Lyrics");
-		List<Song> songList = songService.getByDescriptionLyrics(lyrics);
-		return ResponseEntity.ok().headers(headers).body(songList);
+	     Song song = songService.getByDescriptionLyrics(lyrics);
+		return ResponseEntity.ok().headers(headers).body(song);
 	}
 
 	@GetMapping("/songs/lyricist/{lyricist}")
@@ -109,12 +100,12 @@ public class SongsController {
 	}
 
 	@GetMapping("/songs/language/{language}/name/{name}")
-	public ResponseEntity<List<Song>> getByDescriptionLanguageAndName(@PathVariable("language") String language,
+	public ResponseEntity<Song> getByDescriptionLanguageAndName(@PathVariable("language") String language,
 			@PathVariable("name") String name) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("desc", "Retriving Song By Language and Name");
-		List<Song> songList = songService.getByDescriptionLanguageAndSongName(language, name);
-		return ResponseEntity.ok().headers(headers).body(songList);
+		Song song = songService.getByDescriptionLanguageAndSongName(language, name);
+		return ResponseEntity.ok().headers(headers).body(song);
 	}
 
 	@GetMapping("/songs/moviename/{movieName}")
@@ -125,12 +116,11 @@ public class SongsController {
 		return ResponseEntity.ok().headers(headers).body(songList);
 	}
 
-	@GetMapping("/songs/name/{name}/moviename/{movieName}")
-	public ResponseEntity<Song> findBySongNameAndMovieName(@PathVariable("name") String name,
-			@PathVariable("movieName") String movieName) {
+	@GetMapping("/songs/moviename/{movieName}/name/{name}")
+	public ResponseEntity<Song> findByMovieNameAndSongName(@PathVariable("movieName") String movieName,@PathVariable("name") String name) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("desc", "Retriving Song By Language and Name");
-		Song songNew = songService.getBySongNameAndMovieMovieName(name, movieName);
+		Song songNew = songService.getByMovieNameAndSongName(movieName,name);
 		return ResponseEntity.ok().headers(headers).body(songNew);
 	}
 

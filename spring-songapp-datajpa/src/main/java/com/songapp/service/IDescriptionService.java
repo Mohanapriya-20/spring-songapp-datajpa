@@ -1,5 +1,7 @@
 package com.songapp.service;
 
+import java.util.List;
+
 import com.songapp.exceptions.SongNotFoundException;
 import com.songapp.model.Description;
 
@@ -8,11 +10,13 @@ import com.songapp.model.Description;
  *
  */
 public interface IDescriptionService {
-	void addDescription(Description description);
+	Description addDescription(Description description);
 
 	void updateDescription(Description description);
 
 	void deleteDescription(int descriptionId);
+	
+	List<Description> getAllDescription();
 
 	Description getBySongName(String name) throws SongNotFoundException;
 

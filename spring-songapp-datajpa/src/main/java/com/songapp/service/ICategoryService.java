@@ -20,5 +20,5 @@ public interface ICategoryService {
 
 	Category getById(int categoryId) throws IdNotFoundException;
 
-	Category getByCategoryName(String categoryName) throws CategoryNotFoundException;
+	Category getBySongName(String name) throws CategoryNotFoundException;
 }

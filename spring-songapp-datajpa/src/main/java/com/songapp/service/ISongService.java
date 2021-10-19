@@ -20,10 +20,9 @@ public interface ISongService {
 
 	Song getById(int songId) throws IdNotFoundException;
 
-	Song getByName(String name) throws SongNotFoundException;
 
 //one to One
-	List<Song> getByDescriptionLyrics(String lyrics) throws SongNotFoundException;
+	Song getByDescriptionLyrics(String lyrics) throws SongNotFoundException;
 
 	List<Song> getByDescriptionLyricist(String lyricist) throws SongNotFoundException;
 
@@ -31,12 +30,12 @@ public interface ISongService {
 
 	List<Song> getByDescriptionViews(int views) throws SongNotFoundException;
 
-	List<Song> getByDescriptionLanguageAndSongName(String language, String name) throws SongNotFoundException;
+	Song getByDescriptionLanguageAndSongName(String language, String name) throws SongNotFoundException;
 
 //One to Many
 	List<Song> getByMovieName(String movieName) throws SongNotFoundException;
 
-	Song getBySongNameAndMovieMovieName(String name, String movieName) throws SongNotFoundException;
+	Song getByMovieNameAndSongName(String movieName,String name )throws SongNotFoundException;
 
 //Many to Many
 	List<Song> getBySingerName(String name) throws SongNotFoundException;
